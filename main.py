@@ -13,6 +13,8 @@ BLUE = (0, 255, 255)
 RED= (188, 39, 50)
 DARK_GREY= (80, 78, 81)
 
+FONT = pygame.font.SysFont("comixsans", 16)
+
 class Planet:
     
     AU = 149.6e6 * 1000
@@ -48,6 +50,10 @@ class Planet:
                 
             pygame.draw.lines(win, self.color, False, updated_points, 2)
         
+        if not self.sun:
+            distance_text = FONT.render(f"{round(self.distance_to_sun/1000, 1)}km", 1, WHITE)
+            win.blit(distance_text, (x - distance_text.get_width() / 2, y - distance_text.get_width() / 2))
+            
         pygame.draw.circle(win, self.color, (x,y), self.radius)
         
     def attraction(self, other):
